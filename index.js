@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 5000;
 const { User } = require("./models/User");
+const config = require("./config/key");
 const mongoose = require("mongoose");
 
 //application/x-www-from-urlencoded
@@ -10,12 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 mongoose
-    .connect(
-        "mongodb+srv://rkqlwl1984:djqlf0595!@cluster0.kmasd50.mongodb.net/test",
-        {
-            useNewUrlParser: true,
-        }
-    )
+    .connect(config.mongoURI, { useNewUrlParser: true })
     .then(() => console.log("MongoDB Connected..."))
     .catch((err) => console.log(err));
 
